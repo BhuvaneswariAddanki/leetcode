@@ -18,10 +18,7 @@ public class ReverseWordsInString {
         String reverseString = reverse(s);
         String[] words = reverseString.split(" ");
         StringBuilder result = new StringBuilder();
-        for (String word : words) {
-            if(word.)
-            result.append(reverse(word));
-        }
+        return result.toString();
     }
 
     public String reverse(String s) {
