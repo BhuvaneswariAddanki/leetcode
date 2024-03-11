@@ -1,5 +1,10 @@
 package com.example.leetcode.problemtype.easy;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.
  * <p>
@@ -43,6 +48,28 @@ package com.example.leetcode.problemtype.easy;
  * Leetcode link : https://leetcode.com/problems/next-greater-element-i/description/
  */
 public class NextGreaterElementI {
+
+
+    public int[] nextGreaterElementWithStack(int[] nums1, int[] nums2) {
+
+        int[] result = new int[nums1.length];
+        Deque<Integer> numsDeque = new ArrayDeque<>();
+        Map<Integer, Integer> numsMap = new HashMap<>();
+
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            while (!numsDeque.isEmpty() && nums2[i] > numsDeque.peek()) {
+                numsDeque.pop();
+            }
+            if (!numsDeque.isEmpty()) {
+                numsMap.put(nums2[i], numsDeque.peek());
+            }
+            numsDeque.push(nums2[i]);
+        }
+        for (int i = 0; i < nums1.length; i++) {
+            result[i] = numsMap.getOrDefault(nums1[i], -1);
+        }
+        return result;
+    }
 
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
 
