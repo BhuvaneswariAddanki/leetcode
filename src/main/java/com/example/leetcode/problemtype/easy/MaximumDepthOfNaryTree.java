@@ -54,9 +54,9 @@ public class MaximumDepthOfNaryTree {
                     }
                 }
             }
-
+            depth++;
         }
-        depth++;
+
         return depth;
     }
 

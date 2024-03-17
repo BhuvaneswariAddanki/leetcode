@@ -55,18 +55,20 @@ public class BinaryWatch {
                 builder.append(hours).append(":").append(minutes <= 9 ? "0" + minutes : minutes);
                 result.add(builder.toString());
             }
-            return;
-        }
+        } else {
+            //standard backtracking solution add new value do recursion and then remove it
+            for (int i = position; i < displayedDigits.length; i++) {
+                if (isHour(i)) {
+                    hours += displayedDigits[i];
+                } else {
+                    minutes += displayedDigits[i];
+                }
 
-        //standard backtracking solution add new value do recursion and then remove it
-        for (int i = position; i < displayedDigits.length; i++) {
-            if (isHour(i)) hours += displayedDigits[i];
-            else minutes += displayedDigits[i];
+                backTrack(displayedDigits, num - 1, i + 1, hours, minutes, result);
 
-            backTrack(displayedDigits, num - 1, i + 1, hours, minutes, result);
-
-            if (isHour(i)) hours -= displayedDigits[i];
-            else minutes -= displayedDigits[i];
+                if (isHour(i)) hours -= displayedDigits[i];
+                else minutes -= displayedDigits[i];
+            }
         }
     }
 

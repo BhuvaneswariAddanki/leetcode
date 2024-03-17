@@ -67,7 +67,7 @@ public class ImplementStackUsingQueues {
     }
 
     public int top() {
-        if (queue.size() > 0)
+        if (!queue.isEmpty())
             return queue.peek();
         else
             return -1;

@@ -31,7 +31,7 @@ public class MaxConsecutiveOnes {
         int count = 0;
         int maxCount = 0;
         for (int num : nums) {
-            if (num == 0) {
+            if (num != 1) {
                 maxCount = Math.max(count, maxCount);
                 count = 0;
             } else {
