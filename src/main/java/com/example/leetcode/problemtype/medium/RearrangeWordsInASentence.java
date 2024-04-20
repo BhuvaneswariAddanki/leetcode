@@ -90,7 +90,7 @@ public class RearrangeWordsInASentence {
         for (String word : words)
             maxLen = Math.max(maxLen, word.length());
 
-        ArrayList<String>[] wordLenBuckets = new ArrayList[maxLen];
+        List<String>[] wordLenBuckets = new ArrayList[maxLen];
 
         for (String word : words) {
             int index = word.length() - 1;
@@ -101,7 +101,7 @@ public class RearrangeWordsInASentence {
         }
         StringBuilder sb = new StringBuilder();
         boolean seenFirstWord = false;
-        for (ArrayList<String> wordBucket : wordLenBuckets) {
+        for (List<String> wordBucket : wordLenBuckets) {
             if (wordBucket == null)
                 continue;
 
