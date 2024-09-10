@@ -36,7 +36,21 @@ package com.example.leetcode.problemtype.easy;
  */
 public class ReplaceElementsWithGreatestElementOnRightSide {
 
+
     public int[] replaceElements(int[] arr) {
+        int lastMax = arr[arr.length - 1];
+        arr[arr.length - 1] = -1;
+        for (int i = arr.length - 2; i >= 0; i--) {
+            int temp = arr[i];
+            arr[i] = lastMax;
+            lastMax = Math.max(lastMax, temp);
+
+        }
+        return arr;
+    }
+
+
+    public int[] replaceElements1(int[] arr) {
         int lastMax = -1;
         for (int i = arr.length - 2; i >= 0; i--) {
             if (arr[i + 1] > lastMax) {
@@ -51,5 +65,7 @@ public class ReplaceElementsWithGreatestElementOnRightSide {
         arr[arr.length - 1] = -1;
         return arr;
     }
+
+
 
 }

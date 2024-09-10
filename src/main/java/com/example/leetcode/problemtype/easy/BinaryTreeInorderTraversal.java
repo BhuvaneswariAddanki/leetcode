@@ -21,26 +21,23 @@ import java.util.Stack;
  * <p>
  * Input: root = [1]
  * Output: [1]
- *
+ * <p>
  * Leetcode link : https://leetcode.com/problems/binary-tree-inorder-traversal/description/
  */
 public class BinaryTreeInorderTraversal {
     public List<Integer> inorderTraversalRecursive(TreeNode root) {
 
         List<Integer> response = new ArrayList<>();
-
-        if (root != null) {
-            recursive(root, response);
-        }
+        recursive(root, response);
         return response;
     }
 
     private void recursive(TreeNode node, List<Integer> response) {
-        if (node.left != null)
+        if (node != null) {
             recursive(node.left, response);
-        response.add(node.val);
-        if (node.right != null)
+            response.add(node.val);
             recursive(node.right, response);
+        }
 
 
     }
@@ -60,8 +57,6 @@ public class BinaryTreeInorderTraversal {
             currentNode = currentNode.right;
 
         }
-
-
         return inorderList;
 
     }

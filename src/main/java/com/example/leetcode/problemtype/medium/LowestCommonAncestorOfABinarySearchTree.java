@@ -44,8 +44,7 @@ public class LowestCommonAncestorOfABinarySearchTree {
                 new TreeNode(2, new TreeNode(0), new TreeNode(4, new TreeNode(3), new TreeNode(5))),
                 new TreeNode(8, new TreeNode(7), new TreeNode(9)));
         LowestCommonAncestorOfABinarySearchTree obj = new LowestCommonAncestorOfABinarySearchTree();
-        TreeNode node = obj.lowestCommonAncestor(treeNode, 2, 8);
-        System.out.println(node);
+
     }
 
     public TreeNode lowestCommonAncestorUsingRecursion(TreeNode root, TreeNode p, TreeNode q) {
@@ -75,61 +74,48 @@ public class LowestCommonAncestorOfABinarySearchTree {
         return null;
     }
 
-    public TreeNode lowestCommonAncestor(TreeNode root, int p, int q) {
-
-        if (root == null) {
-            return null;
-        }
+    public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
         boolean[] eleFound = new boolean[2];
-        int min = Math.min(p, q);
-        int max = Math.max(p, q);
-        TreeNode lca = lca(root, min, max, eleFound);
-
-        return eleFound[0] && eleFound[1] ? lca : null;
-
+        TreeNode result = lca2(root, p, q, eleFound);
+        return eleFound[0] && eleFound[1] ? result : null;
     }
 
-    public TreeNode lca(TreeNode root, int min, int max, boolean[] eleFound) {
+    private TreeNode lca2(TreeNode root, TreeNode p, TreeNode q, boolean[] eleFound) {
 
-        if (root == null) {
-            return null;
-        }
-        TreeNode temp = null;
-        if (root.val == min) {
-            eleFound[0] = true;
-            temp = root;
-        }
-        if (root.val == max) {
-            eleFound[1] = true;
-            temp = root;
-        }
-
-        TreeNode left = null;
-        TreeNode right = null;
-        if (!eleFound[0] || !eleFound[1]) {
-            if (min < root.val && max > root.val) {
-                left = lca(root.left, min, max, eleFound);
-                right = lca(root.right, min, max, eleFound);
-            } else if (min > root.val || max > root.val) {
-                right = lca(root.right, min, max, eleFound);
+        if (root != null) {
+            TreeNode temp = null;
+            if (root.val == p.val) {
+                eleFound[0] = true;
+                temp = root;
+            }
+            if (root.val == q.val) {
+                eleFound[1] = true;
+                temp = root;
+            }
+            TreeNode left = null;
+            TreeNode right = null;
+            if (!eleFound[0] || !eleFound[1]) {
+                if (p.val < root.val && q.val < root.val) {
+                    left = lca2(root.left, p, q, eleFound);
+                } else if (p.val > root.val && q.val > root.val) {
+                    right = lca2(root.right, p, q, eleFound);
+                } else {
+                    left = lca2(root.left, p, q, eleFound);
+                    right = lca2(root.right, p, q, eleFound);
+                }
+            }
+            if (temp != null) {
+                return temp;
+            }
+            if (left != null && right != null) {
+                return root;
+            } else if (left != null) {
+                return left;
             } else {
-                left = lca(root.left, min, max, eleFound);
+                return right;
             }
         }
-
-        if (temp != null) {
-            return temp;
-        }
-        if (left != null && right != null) {
-            return root;
-        } else if (left != null) {
-            return left;
-        } else {
-            return right;
-        }
-
+        return null;
     }
-
-
 }
 

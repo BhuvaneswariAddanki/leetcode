@@ -43,9 +43,9 @@ public class MergeIntervals {
     public int[][] merge(int[][] intervals) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        for (int[] ints : intervals) {
-            min = Math.min(min, ints[0]);
-            max = Math.max(max, ints[0]);
+        for (int[] interval : intervals) {
+            min = Math.min(min, interval[0]);
+            max = Math.max(max, interval[0]);
         }
 
         int[] range = new int[max - min + 1];
