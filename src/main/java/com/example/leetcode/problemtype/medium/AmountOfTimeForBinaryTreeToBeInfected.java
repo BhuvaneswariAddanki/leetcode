@@ -69,6 +69,7 @@ public class AmountOfTimeForBinaryTreeToBeInfected {
      * }
      */
 
+
     public static int maxLength(TreeNode node) {
         int lc = node.left == null ? 0 : maxLength(node.left) + 1;
         int rc = node.right == null ? 0 : maxLength(node.right) + 1;

@@ -41,18 +41,31 @@ public class HouseRobber {
         System.out.println(amount);
     }
 
+    public int rob(int[] nums) {
+        if (nums.length == 0) return 0;
+        int lastToLast = 0;
+        int lastHouse = nums[0];
+        for (int i = 2; i <= nums.length; i++) {
+            int current = Math.max(lastHouse, lastToLast + nums[i - 1]);
+            lastToLast = lastHouse;
+            lastHouse = current;
+        }
+        return lastHouse;
+    }
+
+
     public int robUsingIterationAndDp(int[] nums) {
         if (nums.length == 0) return 0;
         int[] dp = new int[nums.length + 1];
         dp[0] = 0;
         dp[1] = nums[0];
-        for (int i = 2; i < nums.length; i++) {
-            dp[i + 1] = Math.max(dp[i], dp[i - 1] + nums[i]);
+        for (int i = 2; i <= nums.length; i++) {
+            dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i - 1]);
         }
         return dp[nums.length];
     }
 
-    public int rob(int[] nums) {
+    public int rob2(int[] nums) {
 
         int lastToLastSum = 0;
         int lastSum = nums[0];
@@ -70,17 +83,17 @@ public class HouseRobber {
     public int robUsingDp(int[] nums) {
         memo = new int[nums.length + 1];
         Arrays.fill(memo, -1);
-        return rob(nums, nums.length - 1);
+        return rob2(nums, nums.length - 1);
     }
 
-    private int rob(int[] nums, int i) {
+    private int rob2(int[] nums, int i) {
         if (i < 0) {
             return 0;
         }
         if (memo[i] >= 0) {
             return memo[i];
         }
-        int result = Math.max(rob(nums, i - 2) + nums[i], rob(nums, i - 1));
+        int result = Math.max(rob2(nums, i - 2) + nums[i], rob2(nums, i - 1));
         memo[i] = result;
         return result;
     }

@@ -34,7 +34,7 @@ import java.util.List;
  * 0 <= k <= 1000
  * <p>
  * Leetcode link : https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/description/
- *
+ * <p>
  * geeksForGeeks :: https://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/
  */
 public class AllNodesDistanceKInBinaryTree {
@@ -49,11 +49,15 @@ public class AllNodesDistanceKInBinaryTree {
         }
         return ans;
     }
+
     public void printKDown(TreeNode node, int k, TreeNode blocker, List<Integer> ans) {
-        if (node == null || k < 0 || node == blocker) return;
-        if (k == 0) ans.add(node.val);
-        printKDown(node.left, k - 1, blocker, ans);
-        printKDown(node.right, k - 1, blocker, ans);
+        if (node == null || node == blocker) return;
+        if (k == 0) {
+            ans.add(node.val);
+        } else {
+            printKDown(node.left, k - 1, blocker, ans);
+            printKDown(node.right, k - 1, blocker, ans);
+        }
     }
 
 

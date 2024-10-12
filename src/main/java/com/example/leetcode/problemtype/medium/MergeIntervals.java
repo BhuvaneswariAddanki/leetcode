@@ -1,6 +1,7 @@
 package com.example.leetcode.problemtype.medium;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,6 +42,30 @@ public class MergeIntervals {
     }
 
     public int[][] merge(int[][] intervals) {
+
+        if (intervals.length <= 1) {
+            return intervals;
+        }
+
+        Arrays.sort(intervals, Comparator.comparingInt(i -> i[0]));
+        List<int[]> result = new ArrayList<>();
+        int[] prevInterval = intervals[0];
+        result.add(prevInterval);
+        for (int[] interval : intervals) {
+            if (interval[0] <= prevInterval[1]) {
+                prevInterval[1] = Math.max(interval[1], prevInterval[1]);
+            } else {
+                prevInterval = interval;
+                result.add(prevInterval);
+            }
+
+        }
+        return result.toArray(new int[result.size()][]);
+
+
+    }
+
+    public int[][] merge3(int[][] intervals) {
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
         for (int[] interval : intervals) {
@@ -79,7 +104,7 @@ public class MergeIntervals {
                 .collect(Collectors.toList());
         int index = 0;
         while (index < sortedList.size() - 1) {
-            if (sortedList.get(index).start <= sortedList.get(index + 1).start && sortedList.get(index).end >= sortedList.get(index + 1).start) {
+            if (sortedList.get(index).end >= sortedList.get(index + 1).start) {
                 sortedList.get(index).setEnd(Math.max(sortedList.get(index + 1).end, sortedList.get(index).end));
                 sortedList.remove(sortedList.get(index + 1));
             } else {

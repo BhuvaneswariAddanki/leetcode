@@ -60,8 +60,7 @@ public class GraphValidTree {
         if (rootX != rootY) {
             if (rank[rootX] < rank[rootY]) {
                 root[rootX] = rootY;
-            } else if (rank[rootX] > rank[rootY]) {
-                root[rootY] = rootX;
+                rank[rootY]++;
             } else {
                 root[rootY] = rootX;
                 rank[rootX]++;

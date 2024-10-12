@@ -83,13 +83,12 @@ public class CombinationSum {
             return;
         }
         if (target == 0) {
-            res.add(new ArrayList(path));
+            res.add(new ArrayList<>(path));
             return;
         }
         for (int i = start; i < nums.length; i++) {
             path.add(nums[i]);
-            int nowposition = i;
-            backtrack(nums, target - nums[i], path, nowposition);
+            backtrack(nums, target - nums[i], path, i);
             path.remove(path.size() - 1);
         }
     }

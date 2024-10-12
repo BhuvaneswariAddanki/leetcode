@@ -30,6 +30,19 @@ package com.example.leetcode.problemtype.medium;
  */
 public class JumpGame {
 
+
+    public boolean canJumpFromBeginning(int[] nums) {
+        int canReach = 0;
+        for (int i = 0; i <= canReach; i++) {
+            if (i + nums[i] >= nums.length - 1) {
+                return true;
+            }
+            canReach = Math.max(canReach, i + nums[i]);
+        }
+        return false;
+
+    }
+
     public boolean canJumpFromLastPosCheck(int[] nums) {
         int lastPos = nums.length - 1;
         for (int i = nums.length - 1; i >= 0; i--) {
